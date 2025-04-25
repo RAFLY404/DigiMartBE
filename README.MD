@@ -158,6 +158,4 @@ The API documentation is available at `/api-docs` when the server is running. Th
 ## License
 
 MIT
-\`\`\`
 
-Let's create a package.json file:
