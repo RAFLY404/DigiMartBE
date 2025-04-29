@@ -5,7 +5,7 @@ import { createPayment } from "../services/paymentServices.js";
 // Create new order
 export const createOrder = async (req, res, next) => {
   try {
-    const { shippingAddressId, paymentMethod, shippingFee = 10.0 } = req.body;
+    const { shippingAddressId, paymentMethod, shippingFee = 10 } = req.body;
 
     // Get user's cart
     const cart = await prisma.cart.findUnique({
@@ -36,7 +36,7 @@ export const createOrder = async (req, res, next) => {
     const subtotal = cart.items.reduce((sum, item) => sum + Number(item.product.price) * item.quantity, 0);
 
     // Calculate total
-    const total = subtotal + Number(shippingFee);
+    const total = subtotal;
 
     // Create order
     const order = await prisma.order.create({

@@ -191,6 +191,10 @@ async function createCategories() {
 }
 
 async function createProducts(categories) {
+  const conversionRate = 16000; // 1 USD = 16,000 IDR
+
+  const toIDR = (usd) => (usd ? Math.round(usd * conversionRate) : null);
+
   const categoryMap = categories.reduce((map, category) => {
     map[category.name] = category;
     return map;
@@ -201,8 +205,8 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "iPhone 13 Pro",
-        price: 999.99,
-        oldPrice: 1099.99,
+        price: toIDR(999.99),
+        oldPrice: toIDR(1099.99),
         description: "The latest iPhone with A15 Bionic chip, Pro camera system, and Super Retina XDR display with ProMotion.",
         image: "/uploads/products/iphone-13-pro.jpg",
         images: ["/uploads/products/iphone-13-pro-1.jpg", "/uploads/products/iphone-13-pro-2.jpg"],
@@ -224,8 +228,8 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "Samsung Galaxy S21",
-        price: 799.99,
-        oldPrice: 899.99,
+        price: toIDR(799.99),
+        oldPrice: toIDR(899.99),
         description: "5G smartphone with 8K video, Dynamic AMOLED display, and all-day battery life.",
         image: "/uploads/products/samsung-s21.jpg",
         images: ["/uploads/products/samsung-s21-1.jpg", "/uploads/products/samsung-s21-2.jpg"],
@@ -248,7 +252,7 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "MacBook Pro 14-inch",
-        price: 1999.99,
+        price: toIDR(1999.99),
         oldPrice: null,
         description: "The most powerful MacBook Pro ever with M1 Pro or M1 Max chip, Liquid Retina XDR display, and up to 17 hours of battery life.",
         image: "/uploads/products/macbook-pro-14.jpg",
@@ -271,8 +275,8 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "Dell XPS 15",
-        price: 1499.99,
-        oldPrice: 1699.99,
+        price: toIDR(1499.99),
+        oldPrice: toIDR(1699.99),
         description: "Powerhouse performance with 11th Gen Intel Core processors, NVIDIA graphics, and InfinityEdge display.",
         image: "/uploads/products/dell-xps-15.jpg",
         images: ["/uploads/products/dell-xps-15-1.jpg", "/uploads/products/dell-xps-15-2.jpg"],
@@ -295,8 +299,8 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "Classic Fit Polo Shirt",
-        price: 39.99,
-        oldPrice: 49.99,
+        price: toIDR(39.99),
+        oldPrice: toIDR(49.99),
         description: "Comfortable cotton polo shirt with classic fit, perfect for casual wear.",
         image: "/uploads/products/polo-shirt.jpg",
         images: ["/uploads/products/polo-shirt-1.jpg", "/uploads/products/polo-shirt-2.jpg"],
@@ -319,7 +323,7 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "Slim Fit Jeans",
-        price: 59.99,
+        price: toIDR(59.99),
         oldPrice: null,
         description: "Stylish slim fit jeans with stretch denim for comfort and mobility.",
         image: "/uploads/products/slim-jeans.jpg",
@@ -343,8 +347,8 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "Stand Mixer",
-        price: 349.99,
-        oldPrice: 399.99,
+        price: toIDR(349.99),
+        oldPrice: toIDR(399.99),
         description: "Powerful stand mixer with 10 speeds and multiple attachments for all your baking needs.",
         image: "/uploads/products/stand-mixer.jpg",
         images: ["/uploads/products/stand-mixer-1.jpg", "/uploads/products/stand-mixer-2.jpg"],
@@ -366,8 +370,8 @@ async function createProducts(categories) {
     prisma.product.create({
       data: {
         name: "Coffee Maker",
-        price: 129.99,
-        oldPrice: 149.99,
+        price: toIDR(129.99),
+        oldPrice: toIDR(149.99),
         description: "Programmable coffee maker with thermal carafe to keep your coffee hot for hours.",
         image: "/uploads/products/coffee-maker.jpg",
         images: ["/uploads/products/coffee-maker-1.jpg", "/uploads/products/coffee-maker-2.jpg"],
@@ -390,6 +394,7 @@ async function createProducts(categories) {
 
   return products;
 }
+
 
 async function createAddresses(users) {
   const addresses = [];
